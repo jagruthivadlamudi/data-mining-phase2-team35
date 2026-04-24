@@ -15,9 +15,9 @@ ethnicity_df.columns = ethnicity_df.columns.str.strip()
 print("Ethnicity columns found:")
 print(ethnicity_df.columns.tolist())
 
-# =========================
+
 # 1. SALARY DATA CLEANING
-# =========================
+
 
 clean_salary = salary_df.copy()
 
@@ -47,9 +47,9 @@ flag_columns = [
 
 clean_salary["has_audit_issue"] = clean_salary[flag_columns].any(axis=1)
 
-# =========================
+
 # 2. SALARY METRICS
-# =========================
+
 
 total_records = len(clean_salary)
 flagged_records = clean_salary["has_audit_issue"].sum()
@@ -70,9 +70,9 @@ if "Male" in pivot_gap.columns and "Female" in pivot_gap.columns:
 else:
     pivot_gap["Adjusted_Pay_Gap"] = np.nan
 
-# =========================
+
 # 3. ETHNICITY DATA CLEANING
-# =========================
+
 
 clean_ethnicity = ethnicity_df.copy()
 
@@ -94,9 +94,9 @@ for col in percentage_cols:
 
 clean_ethnicity["flag_missing_percentage"] = clean_ethnicity[percentage_cols].isna().any(axis=1)
 
-# =========================
+
 # 4. SUMMARY METRICS
-# =========================
+
 
 average_adjusted_pay_gap = pivot_gap["Adjusted_Pay_Gap"].mean()
 
@@ -110,18 +110,18 @@ summary = {
 
 summary_df = pd.DataFrame(summary.items(), columns=["Metric", "Value"])
 
-# =========================
+
 # 5. SAVE OUTPUTS
-# =========================
+
 
 clean_salary.to_csv("output/cleaned_salary_data.csv", index=False)
 clean_ethnicity.to_csv("output/cleaned_google_ethnicity.csv", index=False)
 pivot_gap.to_csv("output/adjusted_pay_gap.csv", index=False)
 summary_df.to_csv("output/project_summary_metrics.csv", index=False)
 
-# =========================
+
 # 6. PRINT RESULTS
-# =========================
+
 
 print("\nPROJECT SUMMARY METRICS")
 print(summary_df)
@@ -134,9 +134,10 @@ print("- cleaned_salary_data.csv")
 print("- cleaned_google_ethnicity.csv")
 print("- adjusted_pay_gap.csv")
 print("- project_summary_metrics.csv")
-# =========================
+
+
 # 7. VISUALIZATIONS
-# =========================
+
 
 import matplotlib.pyplot as plt
 
